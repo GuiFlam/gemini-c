@@ -1,0 +1,34 @@
+# guifl.com
+
+Étudiant en génie électrique à l'ÉTS, intéressé par les systèmes embarqués, l'automatisation industrielle et l'infrastructure technique.
+
+> "The best way to predict the future is to build it."
+
+## Qui suis-je?
+
+Je suis étudiant en génie électrique à l'École de technologie supérieure (ÉTS) à Montréal, avec un intérêt pour les systèmes embarqués, l'automatisation et l'intégration de technologies.
+
+Actuellement stagiaire en gestion de projets dans la Division Énergie chez Laurin Laurin (1991) Inc, je travaille sur des projets touchant l'infrastructure électrique et la gestion de systèmes techniques.
+
+## Domaines d'intérêt
+
+* Systèmes embarqués et programmation bas niveau (C)
+* Automatisation industrielle et contrôle de processus
+* Infrastructure technique et déploiement de systèmes
+* Administration système Linux
+* Intégration de technologies et IoT
+
+## Navigation
+
+=> /about.gmi En savoir plus sur mon parcours
+=> /projects.gmi Découvrir mes projets techniques
+=> /tech.gmi Consulter mes compétences techniques
+=> /gemini.gmi Qu'est-ce que le protocole Gemini?
+=> /contact.gmi Me contacter
+
+---
+
+Cette capsule est hébergée sur le protocole Gemini, une alternative minimaliste et respectueuse de la vie privée au web traditionnel. Vous pouvez y accéder nativement via:
+```bash
+gemini://gemini.guifl.com:443
+```

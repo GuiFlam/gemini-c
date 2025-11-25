@@ -1,25 +1,160 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 
 const char* CSS = 
 "<style>\n"
 "body { \n"
-"    background-color: #ffffff; \n"
-"    color: #333333; \n"
-"    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;\n"
-"    max-width: 800px; \n"
+"    background: #fafafa; \n"
+"    color: #0a0a0a; \n"
+"    font-family: 'Courier New', 'Courier', monospace;\n"
+"    max-width: 780px; \n"
 "    margin: 0 auto; \n"
-"    padding: 2rem 1rem; \n"
+"    padding: 4rem 2rem; \n"
 "    line-height: 1.65; \n"
+"    min-height: 100vh; \n"
+"    border-left: 1px solid #e0e0e0; \n"
+"    border-right: 1px solid #e0e0e0; \n"
 "}\n"
-"h1 { color: #111; font-size: 2.5rem; font-weight: 700; }\n"
-"h2 { color: #222; font-size: 1.75rem; font-weight: 650; }\n"
-"h3 { color: #333; font-size: 1.25rem; }\n"
-"a { color: #0056b3; text-decoration: none; border-bottom: 1px dotted #0056b3; }\n"
-"pre { background: #f8f9fa; padding: 1.2rem; border: 1px solid #e9ecef; border-radius: 4px; }\n"
-"blockquote { border-left: 3px solid #333; padding-left: 1.2rem; color: #666; font-style: italic; }\n"
-"li { margin-bottom: 0.4rem; }\n"
+"@media (max-width: 768px) {\n"
+"    body {\n"
+"        padding: 2rem 1rem;\n"
+"        border-left: none;\n"
+"        border-right: none;\n"
+"    }\n"
+"}\n"
+"h1 { \n"
+"    color: #0a0a0a; \n"
+"    font-size: 2.5rem; \n"
+"    font-weight: 700; \n"
+"    letter-spacing: -0.02em; \n"
+"    margin-bottom: 0.5rem; \n"
+"    text-transform: uppercase; \n"
+"    border-bottom: 2px solid #7c3aed; \n"
+"    padding-bottom: 0.5rem; \n"
+"    word-wrap: break-word;\n"
+"}\n"
+"@media (max-width: 768px) {\n"
+"    h1 {\n"
+"        font-size: 1.8rem;\n"
+"    }\n"
+"}\n"
+"h2 { \n"
+"    color: #171717; \n"
+"    font-size: 1.5rem; \n"
+"    font-weight: 700; \n"
+"    margin-top: 3rem; \n"
+"    margin-bottom: 1rem; \n"
+"    text-transform: uppercase; \n"
+"    letter-spacing: 0.05em; \n"
+"    word-wrap: break-word;\n"
+"}\n"
+"@media (max-width: 768px) {\n"
+"    h2 {\n"
+"        font-size: 1.3rem;\n"
+"        margin-top: 2rem;\n"
+"    }\n"
+"}\n"
+"h3 { \n"
+"    color: #404040; \n"
+"    font-size: 1.1rem; \n"
+"    font-weight: 700; \n"
+"    margin-top: 2rem; \n"
+"    margin-bottom: 0.75rem; \n"
+"    letter-spacing: 0.03em; \n"
+"    word-wrap: break-word;\n"
+"}\n"
+"@media (max-width: 768px) {\n"
+"    h3 {\n"
+"        font-size: 1rem;\n"
+"    }\n"
+"}\n"
+"a { \n"
+"    color: #7c3aed; \n"
+"    text-decoration: none; \n"
+"    font-weight: 700; \n"
+"    border-bottom: 2px solid #7c3aed; \n"
+"    transition: all 0.1s; \n"
+"    word-wrap: break-word;\n"
+"}\n"
+"a:hover { \n"
+"    color: #ffffff; \n"
+"    background: #7c3aed; \n"
+"    padding: 2px 6px; \n"
+"    border-bottom: 2px solid #7c3aed; \n"
+"}\n"
+"pre { \n"
+"    background: #1a1a1a; \n"
+"    color: #e0e0e0; \n"
+"    padding: 1.5rem; \n"
+"    border-radius: 4px; \n"
+"    overflow-x: auto; \n"
+"    font-size: 0.9rem; \n"
+"    line-height: 1.6; \n"
+"    border: 1px solid #7c3aed; \n"
+"    margin: 2rem 0; \n"
+"    max-width: 100%;\n"
+"}\n"
+"@media (max-width: 768px) {\n"
+"    pre {\n"
+"        padding: 1rem;\n"
+"        font-size: 0.8rem;\n"
+"        margin: 1.5rem 0;\n"
+"    }\n"
+"}\n"
+"code { \n"
+"    color: #7c3aed; \n"
+"    font-weight: 700; \n"
+"    background: #f0f0f0; \n"
+"    padding: 2px 6px; \n"
+"    border-radius: 2px; \n"
+"    word-wrap: break-word;\n"
+"}\n"
+"pre code { \n"
+"    color: #e0e0e0; \n"
+"    background: transparent; \n"
+"    padding: 0; \n"
+"}\n"
+"blockquote { \n"
+"    border-left: 4px solid #7c3aed; \n"
+"    padding-left: 1.5rem; \n"
+"    color: #525252; \n"
+"    font-style: italic; \n"
+"    margin: 2rem 0; \n"
+"    background: #f5f5f5; \n"
+"    padding: 1rem 1.5rem; \n"
+"}\n"
+"@media (max-width: 768px) {\n"
+"    blockquote {\n"
+"        padding-left: 1rem;\n"
+"        padding: 0.75rem 1rem;\n"
+"        margin: 1.5rem 0;\n"
+"    }\n"
+"}\n"
+"ul { \n"
+"    padding-left: 2rem; \n"
+"    margin: 1.5rem 0; \n"
+"}\n"
+"@media (max-width: 768px) {\n"
+"    ul {\n"
+"        padding-left: 1.5rem;\n"
+"    }\n"
+"}\n"
+"li { \n"
+"    margin-bottom: 0.6rem; \n"
+"    color: #171717; \n"
+"}\n"
+"li::marker { \n"
+"    content: '> '; \n"
+"    color: #7c3aed; \n"
+"    font-weight: 700; \n"
+"}\n"
+"p { \n"
+"    margin: 1.25rem 0; \n"
+"    color: #171717; \n"
+"    word-wrap: break-word;\n"
+"}\n"
 "</style>\n";
 
 void write_html_header(FILE *output, const char *title) {
@@ -33,23 +168,24 @@ void write_html_header(FILE *output, const char *title) {
     fprintf(output, "<body>\n");
 }
 
-int main(int argc, char *argv[])
-{
-    if (argc != 2) {
-	    fprintf(stderr, "Usage: %s <file.gmi>\n", argv[0]);
-	    return 1;
-    }
- 
-    FILE *html_file = fopen("index.html", "w");
+void parse_gemtext_to_html(char *name) {
+    char html_path[512];
+    char gemtext_path[512];
+    
+    snprintf(html_path, sizeof(html_path), "./html/%s.html", name);
+    snprintf(gemtext_path, sizeof(gemtext_path), "./gemtext/%s.gmi", name);
+
+    FILE *html_file = fopen(html_path, "w");
 
     write_html_header(html_file, "guifl.com Gemini Capsule");
 
-    FILE *file = fopen(argv[1], "r");
+    FILE *file = fopen(gemtext_path, "r");
 
     // 512 bytes buffer to store each line
     char line[512];
 
     int in_code_block = 0;
+    int in_list = 0;
 
     if (file != NULL)
     {
@@ -93,13 +229,18 @@ int main(int argc, char *argv[])
                     fprintf(html_file, "<a href=\"%s\">%s</a><br>\n", url_pos, url_pos);
                 }
             }
-            else if(strncmp(line, "*", 1) == 0) {
-                printf("LIST:\t %s", line+1);
-                fprintf(html_file, "<ul>%s</ul>\n", line+1);
+            else if(strncmp(line, "* ", 2) == 0) {
+                if(in_list == 0) {
+                    in_list = 1;
+                    fprintf(html_file, "<ul>\n");
+                }
+                printf("LIST:\t %s", line+2);
+                
+                fprintf(html_file, "<li>%s</li>\n", line+1);
             }
             else if(strncmp(line, ">", 1) == 0) {
                 printf("QUOTE:\t %s", line+1);
-                fprintf(html_file, "<blockquote>%s</blockquote><br>\n", line+1);
+                fprintf(html_file, "<blockquote>%s</blockquote>\n", line+1);
             }
             else if(strncmp(line, "```", 3) == 0) {
                 if(in_code_block == 0) {
@@ -117,20 +258,67 @@ int main(int argc, char *argv[])
                 printf("EMPTY LINE\n");
                 fprintf(html_file, "<br>\n");
             }
+            else if(in_list == 1 && strncmp(line, "* ", 2) != 0) {
+                in_list = 0;
+                fprintf(html_file, "</ul>\n");
+            }
             else {
+                if(strncmp(line, "", 1) == 0 || strncmp(line, " ", 1) == 0) {
+                    continue;
+                }
+
+                if(in_list == 1) {
+                    in_list = 0;
+                    fprintf(html_file, "</ul>\n");
+                }
+
                 printf("TEXT:\t %s", line);
-                fprintf(html_file, "<p>%s</p>", line);
+                fprintf(html_file, "<p>%s</p>\n", line);
             }
 	    }
 	    fclose(file);
     }
     else {
 	    fprintf(stderr, "Unable to open file!\n");
-	    return 1;
     }
 
     fprintf(html_file, "</body>\n</html>");
     fclose(html_file);
+}
+
+int main(int argc, char *argv[])
+{
+    struct dirent *de;
+    DIR *dr = opendir("./gemtext/");
+
+    if(dr == NULL) {
+        return 0;
+    }
+ 
+    char** strings = (char**)malloc(100*sizeof(char*));
+
+    if (strings == NULL) {
+        return 1;
+    }
+
+    int count = 0;
+    while((de = readdir(dr)) != NULL) {
+        if(strncmp(de->d_name, ".", 1) != 0) {
+            strings[count] = (char*)malloc(25);
+            sprintf(strings[count], "%s", de->d_name);
+            count++;
+        }
+    }
+    closedir(dr);
+
+    for(int i = 0; i < count; i++) {
+        //printf("%s\n", strings[i]);
+        char *dot = strchr(strings[i], '.');
+        if(dot) *dot = '\0';
+        parse_gemtext_to_html(strings[i]);
+    }
+
+    free(strings);
 
     return 0;
 }
